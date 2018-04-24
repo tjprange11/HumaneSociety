@@ -8,7 +8,10 @@ namespace HumaneSociety
 {
     public static class Query
     {
-        
+        public Client GetClient(string username, string password)
+        {
+            
+        }
         
       
     }
