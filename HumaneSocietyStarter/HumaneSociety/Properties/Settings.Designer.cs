@@ -33,15 +33,5 @@ namespace HumaneSociety.Properties {
                 return ((string)(this["HumaneSocietyConnectionString"]));
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=HumaneSociety;Integrated Security=True")]
-        public string HumaneSocietyConnectionString1 {
-            get {
-                return ((string)(this["HumaneSocietyConnectionString1"]));
-            }
-        }
     }
 }
