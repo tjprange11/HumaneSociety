@@ -12,19 +12,28 @@ namespace HumaneSociety
     public static class Query
     {
 
-        public static Client GetClient(string username, string password)
+        public static IQueryable<Client> GetClient(string username, string password)
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-            Client client = (Client)(db.Clients.Where(c => c.userName.Equals(username) && c.pass.Equals(password)));
+            var client = (db.Clients.Where(c => c.userName.Equals(username) && c.pass.Equals(password)));
             return client;
         }
-
-        
-        public static Animal GetAnimalByID(int ID)
+        public static IQueryable<Animal> GetAnimalByID(int ID)
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-            Animal animal = (Animal)(db.Animals.Where(id => id.ID == ID));
+            var animal = (db.Animals.Where(id => id.ID == ID));
             return animal;
+        }
+        public static void Adopt(Animal animal, Client client)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            
+        }
+        public static IQueryable<ClientAnimalJunction> GetPendingAdoptions()
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var pendingAdoptions = db.ClientAnimalJunctions.Where(c => c.approvalStatus.Equals("Approved"));
+            return pendingAdoptions;
         }
 
 
