@@ -19,6 +19,12 @@ namespace HumaneSociety
             return client;
         }
         
+        public static Animal GetAnimalByID(int ID)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            Animal animal = (Animal)(db.Animals.Where(id => id.ID == ID));
+            return animal;
+        }
 
 
         
