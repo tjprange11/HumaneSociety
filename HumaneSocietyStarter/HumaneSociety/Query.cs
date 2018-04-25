@@ -18,6 +18,7 @@ namespace HumaneSociety
             Client client = (Client)(db.Clients.Where(c => c.userName.Equals(username) && c.pass.Equals(password)));
             return client;
         }
+
         
       
     }
