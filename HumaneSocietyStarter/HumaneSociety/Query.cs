@@ -55,5 +55,15 @@ namespace HumaneSociety
             var clients = db.Clients;
             return clients;
         }
+
+        public static IQueryable<USState> GetStates()
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var states = db.USStates;
+            return states;
+        }
+
+
+
     }
 }
