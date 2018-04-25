@@ -42,7 +42,18 @@ namespace HumaneSociety
             return employee;
         }
 
-
+        //public static ClientAnimalJunction GetUserAdoptionStatus(Client client)
+        //{
+        //    HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+        //    var status = db.ClientAnimalJunctions.Where(s => s.Animal1.adoptionStatus.)
+        //        return status;
+        //}
         
+        public static IQueryable<Client> RetrieveClients()
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var clients = db.Clients;
+            return clients;
+        }
     }
 }
