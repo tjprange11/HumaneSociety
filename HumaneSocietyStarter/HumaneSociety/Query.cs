@@ -12,16 +12,16 @@ namespace HumaneSociety
     public static class Query
     {
 
-        public static IQueryable<Client> GetClient(string username, string password)
+        public static Client GetClient(string username, string password)
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-            var client = (db.Clients.Where(c => c.userName.Equals(username) && c.pass.Equals(password)));
+            var client = (Client)(db.Clients.Where(c => c.userName.Equals(username) && c.pass.Equals(password)));
             return client;
         }
-        public static IQueryable<Animal> GetAnimalByID(int ID)
+        public static Animal GetAnimalByID(int ID)
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-            var animal = (db.Animals.Where(id => id.ID == ID));
+            var animal = (Animal)(db.Animals.Where(id => id.ID == ID));
             return animal;
         }
         public static void Adopt(Animal animal, Client client)
@@ -34,6 +34,12 @@ namespace HumaneSociety
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
             var pendingAdoptions = db.ClientAnimalJunctions.Where(c => c.approvalStatus.Equals("Approved"));
             return pendingAdoptions;
+        }
+        public static Employee EmployeeLogin(string username, string password)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var employee = (Employee)(db.Employees.Where(c => c.userName.Equals(username) && c.pass.Equals(password)));
+            return employee;
         }
 
 
