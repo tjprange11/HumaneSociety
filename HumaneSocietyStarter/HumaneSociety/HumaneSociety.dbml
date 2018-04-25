@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HumaneSociety" Class="HumaneSocietyDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=HumaneSociety;Integrated Security=True" SettingsObjectName="HumaneSociety.Properties.Settings" SettingsPropertyName="HumaneSocietyConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-O9OV7RT;Initial Catalog=HumaneSociety;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="HumaneSociety.Properties.Settings" SettingsPropertyName="HumaneSocietyConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Animals" Member="Animals">
     <Type Name="Animal">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -18,8 +18,8 @@
       <Association Name="Animal_AnimalShotJunction" Member="AnimalShotJunctions" ThisKey="ID" OtherKey="Animal_ID" Type="AnimalShotJunction" />
       <Association Name="Animal_ClientAnimalJunction" Member="ClientAnimalJunctions" ThisKey="ID" OtherKey="animal" Type="ClientAnimalJunction" />
       <Association Name="Breed_Animal" Member="Breed1" ThisKey="breed" OtherKey="ID" Type="Breed" IsForeignKey="true" />
-      <Association Name="Employee_Animal" Member="Employee" ThisKey="Employee_ID" OtherKey="ID" Type="Employee" IsForeignKey="true" />
       <Association Name="DietPlan_Animal" Member="DietPlan" ThisKey="diet" OtherKey="ID" Type="DietPlan" IsForeignKey="true" />
+      <Association Name="Employee_Animal" Member="Employee" ThisKey="Employee_ID" OtherKey="ID" Type="Employee" IsForeignKey="true" />
       <Association Name="Room_Animal" Member="Room" ThisKey="location" OtherKey="ID" Type="Room" IsForeignKey="true" />
     </Type>
   </Table>
@@ -74,6 +74,14 @@
       <Association Name="UserAddress_Client" Member="UserAddress1" ThisKey="userAddress" OtherKey="ID" Type="UserAddress" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.DietPlans" Member="DietPlans">
+    <Type Name="DietPlan">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="food" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="DietPlan_Animal" Member="Animals" ThisKey="ID" OtherKey="diet" Type="Animal" />
+    </Type>
+  </Table>
   <Table Name="dbo.Employees" Member="Employees">
     <Type Name="Employee">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -84,14 +92,6 @@
       <Column Name="employeeNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Employee_Animal" Member="Animals" ThisKey="ID" OtherKey="Employee_ID" Type="Animal" />
-    </Type>
-  </Table>
-  <Table Name="dbo.DietPlans" Member="DietPlans">
-    <Type Name="DietPlan">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="food" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="amount" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="DietPlan_Animal" Member="Animals" ThisKey="ID" OtherKey="diet" Type="Animal" />
     </Type>
   </Table>
   <Table Name="dbo.Rooms" Member="Rooms">
