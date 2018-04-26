@@ -65,12 +65,21 @@ namespace HumaneSociety
             updatedEmployee.userName = employee.userName;
             updatedEmployee.pass = employee.pass;
         }
+
         internal static void AddAnimal(Animal animal)
         {
             throw new NotImplementedException();
         }
 
         internal static int? GetLocation()
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            string location = UserInterface.GetStringData("location", "the animal's");
+            var query = db.Rooms.Where(room => room.name == location).Select(room => room.ID).First();
+            return query;
+        }
+
+        internal static void UpdateAdoption(bool v, ClientAnimalJunction clientAnimalJunction)
         {
             throw new NotImplementedException();
         }
@@ -118,5 +127,48 @@ namespace HumaneSociety
             return states;
         }
 
+        internal static int? GetBreed()
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            string breed = UserInterface.GetStringData("breed", "the animal's");
+            int category = UserInterface.GetIntegerData("spiecies", "the animal's");
+            string pattern = UserInterface.GetStringData("pattern", "the animal's");
+            try
+            {
+                var query = db.Breeds.Where(b => b.breed1 == breed).Select(b => b.ID).First();
+                return query;
+            }
+            catch
+            {
+                Breed newBreed = new Breed
+                {
+                    breed1 = breed,
+                    catagory = category,
+                    pattern = pattern
+                };
+                return newBreed.ID;
+            }
+            
+        }
+
+        internal static void RemoveAnimal(Animal animal)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void EnterUpdate(Animal animal, Dictionary<int, string> updates)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void UpdateShot(string v, Animal animal)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static object GetShots(Animal animal)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
