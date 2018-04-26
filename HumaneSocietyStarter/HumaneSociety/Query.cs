@@ -313,7 +313,12 @@ namespace HumaneSociety
             db.SubmitChanges();
         }
 
-
+        public static void updateClient(Client client)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            db.Clients.InsertOnSubmit(client);
+            db.SubmitChanges();
+        }
 
 
     }
