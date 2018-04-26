@@ -325,8 +325,18 @@ namespace HumaneSociety
             var clientData = db.Clients.Where(c => c.ID == client.ID).Select(c => c).First();
             clientData.lastName = client.lastName;
             db.SubmitChanges();
-        }
 
+        }
+        public static void UpdateAddress(Client client)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var clientData = db.Clients.Where(c => c.ID == client.ID).Select(c => c).First();
+            clientData.UserAddress1.zipcode = client.UserAddress1.zipcode;
+            clientData.UserAddress1.addessLine1 = client.UserAddress1.addessLine1;
+            clientData.UserAddress1.USState = client.UserAddress1.USState;
+            db.SubmitChanges();
+
+        }
 
         public static void updateClient(Client client)
         {
