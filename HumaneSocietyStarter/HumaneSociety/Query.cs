@@ -68,7 +68,8 @@ namespace HumaneSociety
 
         internal static void AddAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            db.Animals.InsertOnSubmit(animal);
         }
 
         internal static int? GetLocation()
@@ -153,12 +154,125 @@ namespace HumaneSociety
 
         internal static void RemoveAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            db.Animals.DeleteOnSubmit(animal);
         }
 
         internal static void EnterUpdate(Animal animal, Dictionary<int, string> updates)
         {
-            throw new NotImplementedException();
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            foreach(int entry in updates.Keys)
+            {
+                switch (entry)
+                {
+                    case 1:
+                        UpdateCategory(animal, updates[1]);
+                        break;
+                    case 2:
+                        UpdateBreed(animal, updates[2]);
+                        break;
+                    case 3:
+                        UpdateName(animal, updates[3]);
+                        break;
+                    case 4:
+                        UpdateAge(animal, updates[4]);
+                        break;
+                    case 5:
+                        UpdateDemeanor(animal, updates[5]);
+                        break;
+                    case 6:
+                        UpdateKidFriendly(animal, updates[6]);
+                        break;
+                    case 7:
+                        UpdatePetFriendly(animal, updates[7]);
+                        break;
+                    case 8:
+                        UpdateWeight(animal, updates[8]);
+                        break;
+
+                }
+                
+            }
+        }
+        internal static void UpdateCategory(Animal animal, string v)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            Breed breed = db.Breeds.Where(b => b.ID == animal.ID).Select(b => b).First();
+            int category = 0;
+            var isValidCategory = int.TryParse(v, out category);
+            if (isValidCategory)
+            {
+                breed.catagory = category;
+                db.SubmitChanges();
+            }
+        }
+        internal static void UpdateBreed(Animal animal, string v)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+
+            Breed breed = db.Breeds.Where(b => b.ID == animal.ID).Select(b => b).First();
+            breed.breed1 = v;
+            db.SubmitChanges();
+
+        }
+        internal static void UpdateName(Animal animal, string v)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+
+            Animal updatedAnimal = db.Animals.Where(a => a.ID == animal.ID).Select(a => a).First();
+
+            updatedAnimal.name = v;
+            db.SubmitChanges();
+        }
+
+        internal static void UpdateAge(Animal animal, string v)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+
+            Animal updatedAnimal = db.Animals.Where(a => a.ID == animal.ID).Select(a => a).First();
+
+            updatedAnimal.age = Int32.Parse(v);
+            db.SubmitChanges();
+        }
+
+        internal static void UpdateDemeanor(Animal animal, string v)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+
+            Animal updatedAnimal = db.Animals.Where(a => a.ID == animal.ID).Select(a => a).First();
+
+            updatedAnimal.demeanor = v;
+            db.SubmitChanges();
+        }
+
+        internal static void UpdateKidFriendly(Animal animal, string v)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+
+            Animal updatedAnimal = db.Animals.Where(a => a.ID == animal.ID).Select(a => a).First();
+
+            updatedAnimal.kidFriendly = UserInterface.GetBitData(v);
+            db.SubmitChanges();
+        }
+
+        internal static void UpdatePetFriendly(Animal animal, string v)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+
+            Animal updatedAnimal = db.Animals.Where(a => a.ID == animal.ID).Select(a => a).First();
+
+            updatedAnimal.petFriendly = UserInterface.GetBitData(v);
+            db.SubmitChanges();
+        }
+
+        internal static void UpdateWeight(Animal animal, string v)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+
+            Animal updatedAnimal = db.Animals.Where(a => a.ID == animal.ID).Select(a => a).First();
+
+            updatedAnimal.weight = Int32.Parse(v);
+            db.SubmitChanges();
         }
 
         internal static void UpdateShot(string v, Animal animal)
@@ -166,7 +280,7 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        internal static object GetShots(Animal animal)
+        internal static IQueryable<AnimalShotJunction> GetShots(Animal animal)
         {
             throw new NotImplementedException();
         }
