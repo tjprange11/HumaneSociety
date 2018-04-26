@@ -290,7 +290,12 @@ namespace HumaneSociety
 
         internal static void UpdateShot(string v, Animal animal)
         {
-            throw new NotImplementedException();
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var animalShotJunction = db.AnimalShotJunctions.Where(data => data.Animal_ID == animal.ID).Select(data => data).First();
+            var updatedShot = db.Shots.Where(data => data.ID == animalShotJunction.Shot_ID).Select(data => data).First();
+
+            updatedShot.name = v;
+            db.SubmitChanges();
         }
 
         internal static IQueryable<AnimalShotJunction> GetShots(Animal animal)
