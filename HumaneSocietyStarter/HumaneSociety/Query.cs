@@ -61,15 +61,17 @@ namespace HumaneSociety
         public static void AddUsernameAndPassword(Employee employee)
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-            Employee updatedEmployee = (Employee)(db.Employees.Where(e => e.Equals(employee)));
+            var updatedEmployee = db.Employees.Where(e => e.ID == employee.ID).Select(e => e).First();
             updatedEmployee.userName = employee.userName;
             updatedEmployee.pass = employee.pass;
+            db.SubmitChanges();
         }
 
         internal static void AddAnimal(Animal animal)
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
             db.Animals.InsertOnSubmit(animal);
+            db.SubmitChanges();
         }
 
         internal static int? GetLocation()
