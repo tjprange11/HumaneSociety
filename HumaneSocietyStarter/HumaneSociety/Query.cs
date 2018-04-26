@@ -352,7 +352,13 @@ namespace HumaneSociety
             clientData.userName = client.userName;
             db.SubmitChanges();
         }
-
+        public static void UpdateEmail(Client client)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var clientData = db.Clients.Where(c => c.ID == client.ID).Select(c => c).First();
+            clientData.email = client.email;
+            db.SubmitChanges();
+        }
 
     }
 }
