@@ -82,7 +82,20 @@ namespace HumaneSociety
 
         internal static void UpdateAdoption(bool v, ClientAnimalJunction clientAnimalJunction)
         {
-            throw new NotImplementedException();
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var currentJunction = db.ClientAnimalJunctions.Where(data => data.animal == clientAnimalJunction.animal && data.client == clientAnimalJunction.client).Select(data => data).First();
+            var currentAnimal = db.Animals.Where(data => data.ID == clientAnimalJunction.animal).Select(data => data).First();
+            if (v)
+            {
+                currentJunction.approvalStatus = "approved";
+                currentAnimal.adoptionStatus = "adopted";
+                UserInterface.DisplayUserOptions("transferring adoption fee from adopter");
+            }
+            else
+            {
+                currentJunction.approvalStatus = "denied";
+            }
+            db.SubmitChanges();
         }
 
         internal static int? GetDiet()
