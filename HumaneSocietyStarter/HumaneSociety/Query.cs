@@ -354,7 +354,8 @@ namespace HumaneSociety
         public static void updateClient(Client client)
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-            db.Clients.InsertOnSubmit(client);
+            var clientData = db.Clients.Where(c => c.ID == client.ID).Select(c => c).First();
+            clientData = client;
             db.SubmitChanges();
         }
 
@@ -372,6 +373,51 @@ namespace HumaneSociety
             clientData.email = client.email;
             db.SubmitChanges();
         }
+        public static void RunEmployeeQueries(Employee employee, string entry)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            switch (entry)
+            {
+                case "create":
+                    CreateEmployee(employee);
+                    break;
+                case "update":
+                    UpdateEmployee(employee);
+                    break;
+                case "read":
+                    ReadEmployee(employee);
+                    break;
+                case "delete":
+                    DeleteEmployee(employee);
+                    break;
+            }
+        }
+        private static void CreateEmployee(Employee employee)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            db.Employees.InsertOnSubmit(employee);
+            db.SubmitChanges();
+        }
+        private static void UpdateEmployee(Employee employee)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var employeeData = db.Employees.Where(e => e.ID == employee.ID).Select(e => e).First();
+            employeeData = employee;
+            db.SubmitChanges();
 
+        }
+        private static void ReadEmployee(Employee employee)
+        {
+            UserInterface.DisplayUserOptions("First Name : " + employee.firsttName);
+            UserInterface.DisplayUserOptions("Last Name : " + employee.lastName);
+            UserInterface.DisplayUserOptions("Username : " + employee.userName);
+            UserInterface.DisplayUserOptions("Password : " + employee.pass);
+            UserInterface.DisplayUserOptions("Email : " + employee.email);
+        }
+        private static void DeleteEmployee(Employee employee)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            db.Employees.DeleteOnSubmit(employee);
+        }
     }
 }
