@@ -65,7 +65,6 @@ namespace HumaneSociety
             updatedEmployee.userName = employee.userName;
             updatedEmployee.pass = employee.pass;
         }
-
         internal static void AddAnimal(Animal animal)
         {
             throw new NotImplementedException();
@@ -80,5 +79,26 @@ namespace HumaneSociety
         {
             throw new NotImplementedException();
         }
+        //public static ClientAnimalJunction GetUserAdoptionStatus(Client client)
+        //{
+        //    HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+        //    var status = db.ClientAnimalJunctions.Where(s => s.Animal1.adoptionStatus.)
+        //        return status;
+        //}
+        
+        public static IQueryable<Client> RetrieveClients()
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var clients = db.Clients;
+            return clients;
+        }
+
+        public static IQueryable<USState> GetStates()
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var states = db.USStates;
+            return states;
+        }
+
     }
 }

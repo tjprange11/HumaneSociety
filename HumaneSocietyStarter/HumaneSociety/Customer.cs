@@ -110,7 +110,7 @@ namespace HumaneSociety
             if ((bool)UserInterface.GetBitData())
             {
                 Query.Adopt(animal, client);
-                UserInterface.DisplayUserOptions("Adoption request sent we will hold $75 adoption fee until processed");
+                UserInterface.DisplayUserOptions("Adoption request sent, we will hold $75 adoption fee until processed");
             }
         }
 
@@ -125,7 +125,7 @@ namespace HumaneSociety
             }
             else if(animals.Count == 0)
             {
-                UserInterface.DisplayUserOptions("No animals found please try another search");
+                UserInterface.DisplayUserOptions("No animals found, please try another search");
             }
             else
             {
