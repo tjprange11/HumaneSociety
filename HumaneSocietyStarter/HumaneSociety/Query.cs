@@ -15,13 +15,13 @@ namespace HumaneSociety
         public static Client GetClient(string username, string password)
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-            Client client = (Client)(db.Clients.Where(c => c.userName.Equals(username) && c.pass.Equals(password)));
+            Client client = db.Clients.Where(c => c.userName.Equals(username) && c.pass.Equals(password)).Select(c => c).First();
             return client;
         }
         public static Animal GetAnimalByID(int ID)
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-            Animal animal = (Animal)(db.Animals.Where(id => id.ID == ID));
+            Animal animal = db.Animals.Where(id => id.ID == ID).Select(id => id).First();
             return animal;
         }
         public static void Adopt(Animal animal, Client client)
