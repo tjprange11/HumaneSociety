@@ -15,7 +15,7 @@ namespace HumaneSociety
         public static Client GetClient(string username, string password)
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-            Client client = db.Clients.Where(c => c.userName.Equals(username) && c.pass.Equals(password)).Select(c => c).First();
+            Client client = db.Clients.Where(c => c.userName == username && c.pass == password).Select(c => c).First();
             return client;
         }
         public static Animal GetAnimalByID(int ID)
@@ -24,10 +24,9 @@ namespace HumaneSociety
             Animal animal = db.Animals.Where(id => id.ID == ID).Select(id => id).First();
             return animal;
         }
-        public static void Adopt(Animal animal, Client client)
+        internal static void Adopt(Animal animal, Client client)
         {
-            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-            
+
         }
         public static IQueryable<ClientAnimalJunction> GetPendingAdoptions()
         {
