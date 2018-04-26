@@ -77,7 +77,25 @@ namespace HumaneSociety
 
         internal static int? GetDiet()
         {
-            throw new NotImplementedException();
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            string diet = UserInterface.GetStringData("diet", "the animal's");
+            int amount = UserInterface.GetIntegerData("amount", "the animal's");
+
+            try
+            {
+                var query = db.DietPlans.Where(dietPlan => dietPlan.food == diet).Select(dietPlan => dietPlan.ID).First();
+                return query;
+            }
+            catch
+            {
+                DietPlan newDietPlan = new DietPlan
+                {
+                    food = diet,
+                    amount = amount
+                };
+                return newDietPlan.ID;
+
+            }
         }
         //public static ClientAnimalJunction GetUserAdoptionStatus(Client client)
         //{
