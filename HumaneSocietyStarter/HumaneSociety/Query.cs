@@ -312,6 +312,20 @@ namespace HumaneSociety
             db.Clients.InsertOnSubmit(client);
             db.SubmitChanges();
         }
+        public static void UpdateFirstName(Client client)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var clientData = db.Clients.Where(c => c.ID == client.ID).Select(c => c).First();
+            clientData.firstName = client.firstName;
+            db.SubmitChanges();
+        }
+        public static void UpdateLastName(Client client)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var clientData = db.Clients.Where(c => c.ID == client.ID).Select(c => c).First();
+            clientData.lastName = client.lastName;
+            db.SubmitChanges();
+        }
 
 
     }
