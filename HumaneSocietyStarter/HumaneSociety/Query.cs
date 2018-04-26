@@ -107,13 +107,13 @@ namespace HumaneSociety
 
             }
         }
-        //public static ClientAnimalJunction GetUserAdoptionStatus(Client client)
-        //{
-        //    HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-        //    var status = db.ClientAnimalJunctions.Where(s => s.Animal1.adoptionStatus.)
-        //        return status;
-        //}
-        
+        internal static IQueryable<ClientAnimalJunction> GetUserAdoptionStatus(Client client)
+        {
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var adoptions = db.ClientAnimalJunctions.Where(data => data.client == client.ID).Select(data => data);
+            return adoptions;
+        }
+
         public static IQueryable<Client> RetrieveClients()
         {
             HumaneSocietyDataContext db = new HumaneSocietyDataContext();
@@ -312,8 +312,6 @@ namespace HumaneSociety
             db.Clients.InsertOnSubmit(client);
             db.SubmitChanges();
         }
-
-
 
 
     }
