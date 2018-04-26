@@ -282,7 +282,9 @@ namespace HumaneSociety
 
         internal static IQueryable<AnimalShotJunction> GetShots(Animal animal)
         {
-            throw new NotImplementedException();
+            HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+            var shots = db.AnimalShotJunctions.Where(data => data.Animal_ID == animal.ID).Select(data => data);
+            return shots;
         }
     }
 }
